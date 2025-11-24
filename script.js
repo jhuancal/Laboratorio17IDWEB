@@ -155,3 +155,174 @@ var ejercicio10 = function () {
   });
 };
 
+var ejercicio11 = function () {
+  var cargarMensaje = function () {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve("Mensaje cargado");
+      }, 1000);
+    });
+  };
+
+  cargarMensaje()
+    .then(mensaje => { 
+      console.log(mensaje);
+    })
+    .catch(error => { 
+        console.log("Error:", error); 
+    });
+};
+
+var ejercicio12 = function () {
+  var cargarUsuario = function () {
+    return new Promise((resolve) => {
+      var tiempo = Math.floor(Math.random() * (1500 - 800 + 1)) + 800;
+      setTimeout(() => {
+        var usuario = { id: 1, nombre: "Juancito" };
+        resolve(usuario);
+      }, tiempo);
+    });
+  };
+
+  cargarUsuario()
+    .then(usuario => {
+      console.log("Usuario cargado: " + usuario.nombre + " (ID: " + usuario.id + ")");
+    })
+    .catch(error => { 
+        console.log("Error:", error); 
+    });
+};
+
+var ejercicio13 = function () {
+  var dividirAsync = function (a, b) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (b === 0) {
+          reject(new Error("No se puede dividir entre cero"));
+        } else {
+          resolve(a / b);
+        }
+      }, 1500);
+    });
+  };
+
+  dividirAsync(10, 2)
+    .then(resultado => { 
+      console.log("Resultado: " + resultado);
+    })
+    .catch(error => {
+      console.log("Error: " + error.message);
+    });
+
+  dividirAsync(10, 0)
+    .then(resultado => {
+      console.log("Resultado: " + resultado);
+    })
+    .catch(error => console.log("Error: " + error.message));
+};
+
+var ejercicio14 = function () {
+  var procesarLista = function (numeros) {
+    return new Promise((resolve) => {
+      let procesados = 0;
+
+      numeros.forEach(num => {
+        var tiempo = Math.floor(Math.random() * (1500 - 500 + 1)) + 500;
+        setTimeout(() => {
+          console.log("Procesando " + num + "...");
+          procesados++;
+          if (procesados === numeros.length) {
+            resolve("Proceso completado");
+          }
+        }, tiempo);
+      });
+    });
+  };
+
+  var lista = [5, 10, 15, 20];
+  procesarLista(lista)
+    .then(rpta => {
+      console.log(rpta);
+    });
+};
+
+var ejercicio15 = async function () {
+  var cargarMensaje = function () {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve("Mensaje cargado");
+      }, 1000);
+    });
+  };
+
+  const mensaje = await cargarMensaje();
+  console.log(mensaje);
+};
+
+var ejercicio16 = async function () {
+  var cargarUsuario = function () {
+    return new Promise((resolve) => {
+      var tiempo = Math.floor(Math.random() * (1500 - 800 + 1)) + 800;
+      setTimeout(() => {
+        var usuario = { id: 1, nombre: "Juancito" };
+        resolve(usuario);
+      }, tiempo);
+    });
+  };
+
+  const usuario = await cargarUsuario();
+  console.log("Usuario cargado: " + usuario.nombre + " (ID: " + usuario.id + ")");
+};
+
+var ejercicio17 = async function () {
+  var dividirAsync = function (a, b) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (b === 0) {
+          reject(new Error("No se puede dividir entre cero"));
+        } else {
+          resolve(a / b);
+        }
+      }, 1500);
+    });
+  };
+
+  try {
+    const resultado = await dividirAsync(10, 2);
+    console.log("Resultado: " + resultado);
+  } catch (error) {
+    console.log("Error: " + error.message);
+  }
+
+  try {
+    const resultado = await dividirAsync(10, 0);
+    console.log("Resultado: " + resultado);
+  } catch (error) {
+    console.log("Error: " + error.message);
+  }
+};
+
+var ejercicio18 = async function () {
+  var procesarLista = function (numeros) {
+    return new Promise((resolve) => {
+      let procesados = 0;
+
+      numeros.forEach(num => {
+        var tiempo = Math.floor(Math.random() * (1500 - 500 + 1)) + 500;
+        setTimeout(() => {
+          console.log("Procesando " + num + "...");
+          procesados++;
+          if (procesados === numeros.length) {
+            resolve("Proceso completado");
+          }
+        }, tiempo);
+      });
+    });
+  };
+
+  var lista = [5, 10, 15, 20];
+  const rpta = await procesarLista(lista);
+  console.log(rpta);
+};
+
+
